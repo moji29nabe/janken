@@ -22,4 +22,8 @@ $(function(){
   $(window).keyup(function(e){
     sendKey(e.keyCode, false);
   });
+  socket.on('call',function(msg){
+    //$('#call').append($('<li>').text(msg));
+    $('#call').text(msg);
+  })
 });
