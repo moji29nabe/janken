@@ -10,36 +10,27 @@ body {
 
 /* The element to hover over */
 .qs {
-  background-color: #02bdda;
-  border-radius: 16px;
+  background-image: url("/images/space3.png");
   color: #e3fbff;
   cursor: default;
   display: inline-block;
   font-family: 'Helvetica',sans-serif;
   font-size: 18px;
   font-weight: bold;
-  height: 30px;
+  height: 32px;
   line-height: 30px;
   position: relative;
   text-align: center;
-  width: 30px;
-}
-.qs a {
   width: 32px;
-  height: 32px;
-  overflow: hidden;
-  float: left;
 }
-.qs img {
-  display: block;
-}
+
 .qs .popover {
   background-color: rgba(0, 0, 0, 0.85);
   border-radius: 5px;
   bottom: 42px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   color: #fff;
-  display: none;
+  display: block;
   font-size: 12px;
   font-family: 'Helvetica',sans-serif;
   left: -95px;
@@ -59,6 +50,7 @@ body {
   margin-left: -7px;
   position: absolute;
 }
+/*
 .qs:hover .popover {
   display: block;
   -webkit-animation: fade-in .3s linear 1, move-up .3s linear 1;
@@ -114,3 +106,4 @@ body {
     bottom: 42px;
   }
 }
+*/
