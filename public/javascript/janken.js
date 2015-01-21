@@ -8,7 +8,7 @@ $(function(){
   $('#gu').click(function() {
     sendTe('gu');
   });
-  socket.on('call',function(msg){
-    $('#call').text(msg);
+  socket.on('call',function(msg_obj){
+    $('#call').text(msg_obj.msg);
   })
 });

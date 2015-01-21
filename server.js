@@ -26,32 +26,6 @@ io.on('connection', function(socket){
   socket.on('key', function(data){
     player.updateKey(data.key, data.state);
   });
-  var i = 0;
-//  var tasks = [];
-//  tasks.push(setTimeout(function(next) {
-//    socket.broadcast.emit('call', 'jan');
-//    next();
-//  }, 1000/0.5));
-//  tasks.push(setTimeout(function(next) {
-//    socket.broadcast.emit('call', ' ken');
-//    next();
-//  }, 1000/0.5));
-//  tasks.push(setTimeout(function(next) {
-//    socket.broadcast.emit('call', ' ... ');
-//    next();
-//  }, 1000/0.5));
-//  tasks.push(setTimeout(function(next) {
-//    socket.broadcast.emit('call', ' pon! ');
-//    next();
-//  }, 1000/0.5));
-//  async.series(tasks);
-  var words = ['じゃん', 'けん', 'ぽん!'];
-  setInterval(function(){
-    console.log(words[i]);
-    socket.broadcast.emit('call', ' ' + words[i]);
-    if (i < words.length - 1) { i++; }
-    else {i = 0;}
-  }, 1000/0.5);
   socket.on('te', function(te) {
     console.log(te);
   });
@@ -59,5 +33,7 @@ io.on('connection', function(socket){
 
 //メインループの開始
 world.start(function(worldState){
-  io.sockets.emit('update', worldState);
+  //io.sockets.emit('update', worldState);
+  console.log(worldState);
+  io.sockets.emit('call', worldState);
 });
