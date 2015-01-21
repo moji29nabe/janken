@@ -52,6 +52,9 @@ io.on('connection', function(socket){
     if (i < words.length - 1) { i++; }
     else {i = 0;}
   }, 1000/0.5);
+  socket.on('te', function(te) {
+    console.log(te);
+  });
 });
 
 //メインループの開始
