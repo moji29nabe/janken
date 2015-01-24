@@ -8,11 +8,16 @@ var Player = function(id){
     right : false,
     left : false
   };
+  this.te = null;
+  this.result = null;
 };
 
 Player.prototype = {
   updateKey: function(key, status){
     this.keys[key] = status;
+  },
+  updateTe: function(te){
+    this.te = te;
   },
   move: function(){
     if(this.keys.right) this.x++;

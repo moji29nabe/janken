@@ -26,14 +26,29 @@ io.on('connection', function(socket){
   socket.on('key', function(data){
     player.updateKey(data.key, data.state);
   });
+  socket.on('start', function(){
+    //メインループの開始
+    //world.init();
+    world.done = false;
+    world.start(function(worldState){
+      //io.sockets.emit('update', worldState);
+      console.log(worldState);
+      if(!worldState.done) {
+        //じゃんけんポンの掛け声
+        io.sockets.emit('call', worldState);
+      } else {
+        //じゃんけんの結果
+        Object.keys(worldState.players).forEach(function(id){
+          io.to(id).emit('result', worldState.players[id]);
+        });
+        
+      }
+    });
+  });
   socket.on('te', function(te) {
     console.log(te);
+    player.updateTe(te);
   });
 });
 
-//メインループの開始
-world.start(function(worldState){
-  //io.sockets.emit('update', worldState);
-  console.log(worldState);
-  io.sockets.emit('call', worldState);
-});
+
