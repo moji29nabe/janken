@@ -12,7 +12,6 @@ $(function(){
     obj.css("border-color", "#2864f0");
   }
   $('#start').click(function() {
-    $('.qs').css('background-position', '0px 0px');
     socket.emit('start');
   });
   $('#gu').click(function() {
@@ -35,6 +34,9 @@ $(function(){
     console.log(socket);
     //console.log(msg_obj);
     console.log('=======end');
+    if (msg_obj.msg === 'せーの') {
+      $('.qs').css('background-position', '0px 0px');
+    }
     if (msg_obj.msg === 'けん') {
       $('.qs').css('background-position', '-64px 0px');
     }
