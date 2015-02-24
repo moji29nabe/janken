@@ -89,7 +89,7 @@ World.prototype = {
         if (winner_te === te) {
           self.players[id].result = '勝ち！';
         } else {
-          self.players[id].result = '負け。。。';
+          self.players[id].result = '負け。';
         }
       });
     }
