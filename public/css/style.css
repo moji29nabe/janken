@@ -33,10 +33,10 @@ body {
   display: block;
   font-size: 12px;
   font-family: 'Helvetica',sans-serif;
-  left: -95px;
+  top: -40px;
   padding: 7px 10px;
   position: absolute;
-  width: 200px;
+  min-width: 5em;
   z-index: 4;
 }
 .qs .popover:before {

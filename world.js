@@ -27,8 +27,11 @@ World.prototype = {
   start: function(callback){
     var self = this;
     var i = 0;
-    var words = ['じゃん', 'けん', 'ぽん!'];
+    var words = ['せーの', 'じゃん', 'けん', 'ぽん!'];
     //メインループ
+    self.msg = words[i];
+    callback(self);
+    i++;
     var interval_id = setInterval(function(){
       //ここにメインループのロジックを書く
 //    for(var id in self.players)
@@ -89,7 +92,7 @@ World.prototype = {
         if (winner_te === te) {
           self.players[id].result = '勝ち！';
         } else {
-          self.players[id].result = '負け。。。';
+          self.players[id].result = '負け。';
         }
       });
     }
