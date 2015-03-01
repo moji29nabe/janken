@@ -1,4 +1,5 @@
 $(function(){
+  var player_ids = [];
   var socket = io.connect();
   var sendTe = function(te){
     socket.emit(
@@ -28,8 +29,21 @@ $(function(){
     sendTe('pa');
     changeBgColor($('#pa'));
   });
+  socket.on('new_player',function(id){
+    // player がクライアント側に存在しなければ追加
+    if (-1 === player_ids.indexOf(id)) {
+      player_ids.push(id);
+      $('#new_players').append("<span id=\"" + id + "\" class=\"qs\"><span class=\"call popover above\"></span></span>");
+    }
+  });
+  socket.on('leave_player',function(id){
+    var leave_player = '#' + id;
+    $(leave_player).remove();
+    var idx = player_ids.indexOf(id);
+    player_ids.splice(idx, 1);
+  });
   socket.on('call',function(msg_obj){
-    $('#call').text(msg_obj.msg);
+    $('.call').text(msg_obj.msg);
     console.log('=======');
     console.log(socket);
     //console.log(msg_obj);
@@ -44,14 +58,15 @@ $(function(){
       $('.qs').css('background-position', '-32px 0px');
     }
   });
-  socket.on('result',function(msg_obj){
-    console.log('=======');
-    console.log(socket);
-    console.log(msg_obj);
-    console.log('=======end');
-    $('#call').text(msg_obj.result);
-    if (msg_obj.result === '負け。') {
-      $('.qs').css('background-position', '-96px 0px');
-    }
+  socket.on('result',function(players){
+    // TODO player オブジェクトが (players[(uuid?)].idのように) ややこしいので、要リファクタ
+    // players.id のように、id はもう一つ親の階層の方が良い気がする
+    Object.keys(players).forEach(function(id) {
+      var player_id = '#' + players[id].id;
+      $(player_id).children('.call').text(players[id].result);
+      if (players[id].result === '負け。') {
+        $(player_id).css('background-position', '-96px 0px');
+      }
+    });
   })
 });
