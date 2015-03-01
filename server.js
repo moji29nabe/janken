@@ -43,9 +43,7 @@ io.on('connection', function(socket){
         io.sockets.emit('call', worldState);
       } else {
         //じゃんけんの結果
-        Object.keys(worldState.players).forEach(function(id){
-          io.to(id).emit('result', worldState.players[id]);
-        });
+        io.sockets.emit('result', worldState.players);
         
       }
     });

@@ -58,14 +58,15 @@ $(function(){
       $('.qs').css('background-position', '-32px 0px');
     }
   });
-  socket.on('result',function(msg_obj){
-    console.log('=======');
-    console.log(socket);
-    console.log(msg_obj);
-    console.log('=======end');
-    $('#call').text(msg_obj.result);
-    if (msg_obj.result === '負け。') {
-      $('.qs').css('background-position', '-96px 0px');
-    }
+  socket.on('result',function(players){
+    // TODO player オブジェクトが (players[(uuid?)].idのように) ややこしいので、要リファクタ
+    // players.id のように、id はもう一つ親の階層の方が良い気がする
+    Object.keys(players).forEach(function(id) {
+      var player_id = '#' + players[id].id;
+      $(player_id).children('.call').text(players[id].result);
+      if (players[id].result === '負け。') {
+        $(player_id).css('background-position', '-96px 0px');
+      }
+    });
   })
 });
