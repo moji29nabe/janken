@@ -33,7 +33,7 @@ $(function(){
     // player がクライアント側に存在しなければ追加
     if (-1 === player_ids.indexOf(id)) {
       player_ids.push(id);
-      $('#new_players').append("<span id=\"" + id + "\" class=\"qs\"><span id=\"call\" class=\"popover above\"></span></span>");
+      $('#new_players').append("<span id=\"" + id + "\" class=\"qs\"><span class=\"call popover above\"></span></span>");
     }
   });
   socket.on('leave_player',function(id){
@@ -43,7 +43,7 @@ $(function(){
     player_ids.splice(idx, 1);
   });
   socket.on('call',function(msg_obj){
-    $('#call').text(msg_obj.msg);
+    $('.call').text(msg_obj.msg);
     console.log('=======');
     console.log(socket);
     //console.log(msg_obj);
