@@ -1,4 +1,5 @@
 $(function(){
+  var player_ids = [];
   var socket = io.connect();
   var sendTe = function(te){
     socket.emit(
@@ -27,6 +28,19 @@ $(function(){
   $('#pa').click(function() {
     sendTe('pa');
     changeBgColor($('#pa'));
+  });
+  socket.on('new_player',function(id){
+    // player がクライアント側に存在しなければ追加
+    if (-1 === player_ids.indexOf(id)) {
+      player_ids.push(id);
+      $('#new_players').append("<span id=\"" + id + "\" class=\"qs\"><span id=\"call\" class=\"popover above\"></span></span>");
+    }
+  });
+  socket.on('leave_player',function(id){
+    var leave_player = '#' + id;
+    $(leave_player).remove();
+    var idx = player_ids.indexOf(id);
+    player_ids.splice(idx, 1);
   });
   socket.on('call',function(msg_obj){
     $('#call').text(msg_obj.msg);

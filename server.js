@@ -19,9 +19,14 @@ var World = require('./world');
 var world = new World();
 io.on('connection', function(socket){
   var player = world.login(socket.id);
+  //プレイヤーを追加
+  Object.keys(world.players).forEach(function(id){
+    io.sockets.emit('new_player', world.players[id].id);
+  });
   socket.on('disconnect', function(){
-    console.log('disconnect');
+    console.log('disconnect ' + socket.id);
     world.logout(socket.id);
+    io.sockets.emit('leave_player', socket.id);
   });
   socket.on('key', function(data){
     player.updateKey(data.key, data.state);

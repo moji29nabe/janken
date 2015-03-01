@@ -10,6 +10,7 @@ body {
 
 /* The element to hover over */
 .qs {
+  margin-left: 3em;
   background-image: url("/images/space3.png");
   color: #e3fbff;
   cursor: default;
