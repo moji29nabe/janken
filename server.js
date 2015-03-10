@@ -1,4 +1,15 @@
 var express = require('express');
+var log4js = require('log4js');
+log4js.configure({
+ appenders: [
+   { type: 'console' },
+   { type: 'file', filename: 'cheese.log', category: 'cheese' }
+  ]
+});
+
+var logger = log4js.getLogger('cheese');
+logger.setLevel('TRACE');
+
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -11,8 +22,12 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
+//http.configure(function() {
+  app.use(log4js.connectLogger(logger, { level: log4js.levels.INFO }));
+//});
+
 http.listen(3000, function(){
-  console.log('listening on *:3000');
+  logger.info('listening on *:3000');
 });
 
 var World = require('./world');
@@ -24,7 +39,7 @@ io.on('connection', function(socket){
     io.sockets.emit('new_player', world.players[id].id);
   });
   socket.on('disconnect', function(){
-    console.log('disconnect ' + socket.id);
+    logger.info('disconnect ' + socket.id);
     world.logout(socket.id);
     io.sockets.emit('leave_player', socket.id);
   });
@@ -37,7 +52,7 @@ io.on('connection', function(socket){
     world.done = false;
     world.start(function(worldState){
       //io.sockets.emit('update', worldState);
-      console.log(worldState);
+      logger.info(worldState);
       if(!worldState.done) {
         //じゃんけんポンの掛け声
         io.sockets.emit('call', worldState);
@@ -49,7 +64,7 @@ io.on('connection', function(socket){
     });
   });
   socket.on('te', function(te) {
-    console.log(te);
+    logger.trace(te);
     player.updateTe(te);
   });
 });
