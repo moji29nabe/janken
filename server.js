@@ -1,7 +1,14 @@
 var express = require('express');
 var log4js = require('log4js');
-log4js.configure('log4js_config.json');
+log4js.configure({
+ appenders: [
+   { type: 'console' },
+   { type: 'file', filename: 'cheese.log', category: 'cheese' }
+  ]
+});
+
 var logger = log4js.getLogger('cheese');
+logger.setLevel('TRACE');
 
 var app = express();
 var http = require('http').Server(app);
