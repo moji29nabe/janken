@@ -1,17 +1,24 @@
+var express = require('express');
 var log4js = require('log4js');
 log4js.configure('log4js_config.json');
 var logger = log4js.getLogger('cheese');
 
-var express = require('express');
 var app = express();
-app.use(log4js.connectLogger(logger, { level: log4js.levels.INFO }));
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+var async = require('async');
+
 app.use(express.static(__dirname + '/public'));
+
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+//http.configure(function() {
+  app.use(log4js.connectLogger(logger, { level: log4js.levels.INFO }));
+//});
+
 http.listen(3000, function(){
   logger.info('listening on *:3000');
 });
