@@ -18,12 +18,6 @@ Player.prototype = {
   },
   updateTe: function(te){
     this.te = te;
-  },
-  move: function(){
-    if(this.keys.right) this.x++;
-    if(this.keys.left) this.x--;
-    if(this.keys.up) this.y--;
-    if(this.keys.down) this.y++;
   }
 };
 
