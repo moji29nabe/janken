@@ -1,0 +1,19 @@
+{
+  "name": "janken",
+  "version": "0.0.0",
+  "homepage": "https://github.com/moji29nabe/janken",
+  "authors": [
+    "moji29nabe <moji29nabe@localhost>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}

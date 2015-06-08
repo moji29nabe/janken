@@ -29,9 +29,6 @@ io.on('connection', function(socket){
     world.logout(socket.id);
     io.sockets.emit('leave_player', socket.id);
   });
-  socket.on('key', function(data){
-    player.updateKey(data.key, data.state);
-  });
   socket.on('start', function(){
     //メインループの開始
     //world.init();
