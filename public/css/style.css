@@ -25,6 +25,9 @@ body {
   width: 32px;
 }
 
+.qs.me {
+  background-image: url("/images/space3-2.png");
+}
 .qs .popover {
   background-color: rgba(0, 0, 0, 0.85);
   border-radius: 5px;

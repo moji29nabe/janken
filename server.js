@@ -21,6 +21,7 @@ var world = new World();
 io.on('connection', function(socket){
   var player = world.login(socket.id);
   //プレイヤーを追加
+  io.to(player.id).json.emit('me', player.id);
   Object.keys(world.players).forEach(function(id){
     io.sockets.emit('new_player', world.players[id].id);
   });

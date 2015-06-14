@@ -1,4 +1,5 @@
 $(function(){
+  var my_id;
   var player_ids = [];
   var socket = io.connect();
   var sendTe = function(te){
@@ -28,6 +29,11 @@ $(function(){
   $('#pa').click(function() {
     sendTe('pa');
     changeBgColor($('#pa'));
+  });
+  socket.on('me', function(id) {
+    my_id = id;
+    player_ids.push(id);
+    $('#new_players').append("<span id=\"" + id + "\" class=\"qs me\"><span class=\"call popover above\"></span></span>");
   });
   socket.on('new_player',function(id){
     // player がクライアント側に存在しなければ追加
