@@ -35,7 +35,6 @@ io.on('connection', function(socket){
     //world.init();
     world.done = false;
     world.start(function(worldState){
-      //io.sockets.emit('update', worldState);
       logger.info(worldState);
       if(!worldState.done) {
         //じゃんけんポンの掛け声
@@ -43,7 +42,6 @@ io.on('connection', function(socket){
       } else {
         //じゃんけんの結果
         io.sockets.emit('result', worldState.players);
-        
       }
     });
   });
@@ -52,5 +50,3 @@ io.on('connection', function(socket){
     player.updateTe(te);
   });
 });
-
-

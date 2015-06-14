@@ -34,9 +34,6 @@ World.prototype = {
     i++;
     var interval_id = setInterval(function(){
       //ここにメインループのロジックを書く
-//    for(var id in self.players)
-//    //全てのプレイヤーの座標を更新
-//    self.players[id].move();
       if (i < words.length) {
         console.log(words[i]);
         self.msg = words[i];
