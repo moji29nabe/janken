@@ -36,6 +36,8 @@ body {
   display: inline-block;
   height: inherit;
   width: inherit;
+  -moz-transform:   scaleX(-1);
+  -webkit-transform:scaleX(-1);
 }
 
 .qs .popover {
