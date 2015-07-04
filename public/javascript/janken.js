@@ -33,13 +33,21 @@ $(function(){
   socket.on('me', function(id) {
     my_id = id;
     player_ids.push(id);
-    $('#new_players').append("<span id=\"" + id + "\" class=\"qs\"><span class=\"char me\"></span><span class=\"call popover above\"></span></span>");
+    $('#new_players').after("<span id=\"" + id + "\" class=\"qs moonSelector\"><span class=\"char me\"></span><span class=\"call popover above\"></span></span>");
+    var map = new MoonMap('#new_players', {
+      moonSelector: '.moonSelector',
+      radius: 140
+    });
   });
   socket.on('new_player',function(id){
     // player がクライアント側に存在しなければ追加
     if (-1 === player_ids.indexOf(id)) {
       player_ids.push(id);
-      $('#new_players').append("<span id=\"" + id + "\" class=\"qs\"><span class=\"char other\"></span><span class=\"call popover above\"></span></span>");
+      $('#new_players').after("<span id=\"" + id + "\" class=\"qs moonSelector\"><span class=\"char other\"></span><span class=\"call popover above\"></span></span>");
+      var map = new MoonMap('#new_players', {
+        moonSelector: '.moonSelector',
+        radius: 140
+      });
     }
   });
   socket.on('leave_player',function(id){
