@@ -33,13 +33,36 @@ $(function(){
   socket.on('me', function(id) {
     my_id = id;
     player_ids.push(id);
-    $('#new_players').append("<span id=\"" + id + "\" class=\"qs me\"><span class=\"call popover above\"></span></span>");
+    $('#new_players').after("<span id=\"" + id + "\" class=\"qs moonSelector\"><span class=\"char me\"></span><span class=\"call popover above\"></span></span>");
+    var map = new MoonMap('#new_players', {
+      moonSelector: '.moonSelector',
+      radius: 140,
+      startAngle: 180
+    });
   });
   socket.on('new_player',function(id){
     // player がクライアント側に存在しなければ追加
     if (-1 === player_ids.indexOf(id)) {
       player_ids.push(id);
-      $('#new_players').append("<span id=\"" + id + "\" class=\"qs\"><span class=\"call popover above\"></span></span>");
+      $('#new_players').after("<span id=\"" + id + "\" class=\"qs moonSelector\"><span class=\"char other\"></span><span class=\"call popover above\"></span></span>");
+      var map = new MoonMap('#new_players', {
+        moonSelector: '.moonSelector',
+        radius: 140,
+        startAngle: 180
+      });
+      player_ids.forEach(function(player_id) {
+        var idstr = '#' + player_id;
+        // console.log($(idstr).closest('.moon').css("left"))
+        var left = $(idstr).closest('.moon').css("left");
+        left = parseInt(left, 10);
+
+        var childstr = idstr + ' .other';
+        if (0 < left) {
+          $(childstr).addClass("seeleft");
+        } else {
+          $(childstr).removeClass("seeleft");
+        }
+      })
     }
   });
   socket.on('leave_player',function(id){
@@ -55,13 +78,13 @@ $(function(){
     //console.log(msg_obj);
     console.log('=======end');
     if (msg_obj.msg === 'せーの') {
-      $('.qs').css('background-position', '0px 0px');
+      $('.char').css('background-position', '0px 0px');
     }
     if (msg_obj.msg === 'けん') {
-      $('.qs').css('background-position', '-64px 0px');
+      $('.char').css('background-position', '-64px 0px');
     }
     if (msg_obj.msg === 'ぽん!') {
-      $('.qs').css('background-position', '-32px 0px');
+      $('.char').css('background-position', '-32px 0px');
     }
   });
   socket.on('result',function(players){
@@ -71,7 +94,7 @@ $(function(){
       var player_id = '#' + players[id].id;
       $(player_id).children('.call').text(players[id].result);
       if (players[id].result === '負け。') {
-        $(player_id).css('background-position', '-96px 0px');
+        $(player_id).children('.char').css('background-position', '-96px 0px');
       }
     });
   })
