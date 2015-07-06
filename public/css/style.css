@@ -36,6 +36,9 @@ body {
   display: inline-block;
   height: inherit;
   width: inherit;
+}
+
+.seeleft {
   -moz-transform:   scaleX(-1);
   -webkit-transform:scaleX(-1);
 }

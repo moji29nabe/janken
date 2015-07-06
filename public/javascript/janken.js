@@ -36,7 +36,8 @@ $(function(){
     $('#new_players').after("<span id=\"" + id + "\" class=\"qs moonSelector\"><span class=\"char me\"></span><span class=\"call popover above\"></span></span>");
     var map = new MoonMap('#new_players', {
       moonSelector: '.moonSelector',
-      radius: 140
+      radius: 140,
+      startAngle: 180
     });
   });
   socket.on('new_player',function(id){
@@ -46,8 +47,22 @@ $(function(){
       $('#new_players').after("<span id=\"" + id + "\" class=\"qs moonSelector\"><span class=\"char other\"></span><span class=\"call popover above\"></span></span>");
       var map = new MoonMap('#new_players', {
         moonSelector: '.moonSelector',
-        radius: 140
+        radius: 140,
+        startAngle: 180
       });
+      player_ids.forEach(function(player_id) {
+        var idstr = '#' + player_id;
+        // console.log($(idstr).closest('.moon').css("left"))
+        var left = $(idstr).closest('.moon').css("left");
+        left = parseInt(left, 10);
+
+        var childstr = idstr + ' .other';
+        if (0 < left) {
+          $(childstr).addClass("seeleft");
+        } else {
+          $(childstr).removeClass("seeleft");
+        }
+      })
     }
   });
   socket.on('leave_player',function(id){
