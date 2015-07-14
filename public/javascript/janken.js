@@ -13,6 +13,13 @@ $(function(){
     obj.css("background-color", "#2864f0");
     obj.css("border-color", "#2864f0");
   }
+  var radius = function(arr) {
+    var r = 100;
+    if (2 < arr.length) {
+      return r + arr.length * 10;
+    }
+    return r;
+  };
   $('#start').click(function() {
     socket.emit('start');
   });
@@ -36,7 +43,7 @@ $(function(){
     $('#new_players').after("<span id=\"" + id + "\" class=\"qs moonSelector\"><span class=\"char me\"></span><span class=\"call popover above\"></span></span>");
     var map = new MoonMap('#new_players', {
       moonSelector: '.moonSelector',
-      radius: 140,
+      radius: radius(player_ids),
       startAngle: 180
     });
   });
@@ -47,7 +54,7 @@ $(function(){
       $('#new_players').after("<span id=\"" + id + "\" class=\"qs moonSelector\"><span class=\"char other\"></span><span class=\"call popover above\"></span></span>");
       var map = new MoonMap('#new_players', {
         moonSelector: '.moonSelector',
-        radius: 140,
+        radius: radius(player_ids),
         startAngle: 180
       });
       player_ids.forEach(function(player_id) {
@@ -99,3 +106,4 @@ $(function(){
     });
   })
 });
+
