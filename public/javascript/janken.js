@@ -20,6 +20,26 @@ $(function(){
     }
     return r;
   };
+  var stand_in_a_circle = function() {
+    var map = new MoonMap('#new_players', {
+      moonSelector: '.moonSelector',
+      radius: radius(player_ids),
+      startAngle: 180
+    });
+    player_ids.forEach(function(player_id) {
+      var idstr = '#' + player_id;
+      // console.log($(idstr).closest('.moon').css("left"))
+      var left = $(idstr).closest('.moon').css("left");
+      left = parseInt(left, 10);
+
+      var childstr = idstr + ' .other';
+      if (0 < left) {
+        $(childstr).addClass("seeleft");
+      } else {
+        $(childstr).removeClass("seeleft");
+      }
+    });
+  };
   $('#start').click(function() {
     socket.emit('start');
   });
@@ -41,35 +61,14 @@ $(function(){
     my_id = id;
     player_ids.push(id);
     $('#new_players').after("<span id=\"" + id + "\" class=\"qs moonSelector\"><span class=\"char me\"></span><span class=\"call popover above\"></span></span>");
-    var map = new MoonMap('#new_players', {
-      moonSelector: '.moonSelector',
-      radius: radius(player_ids),
-      startAngle: 180
-    });
+    stand_in_a_circle();
   });
   socket.on('new_player',function(id){
     // player がクライアント側に存在しなければ追加
     if (-1 === player_ids.indexOf(id)) {
       player_ids.push(id);
       $('#new_players').after("<span id=\"" + id + "\" class=\"qs moonSelector\"><span class=\"char other\"></span><span class=\"call popover above\"></span></span>");
-      var map = new MoonMap('#new_players', {
-        moonSelector: '.moonSelector',
-        radius: radius(player_ids),
-        startAngle: 180
-      });
-      player_ids.forEach(function(player_id) {
-        var idstr = '#' + player_id;
-        // console.log($(idstr).closest('.moon').css("left"))
-        var left = $(idstr).closest('.moon').css("left");
-        left = parseInt(left, 10);
-
-        var childstr = idstr + ' .other';
-        if (0 < left) {
-          $(childstr).addClass("seeleft");
-        } else {
-          $(childstr).removeClass("seeleft");
-        }
-      })
+      stand_in_a_circle();
     }
   });
   socket.on('leave_player',function(id){
@@ -77,6 +76,7 @@ $(function(){
     $(leave_player).remove();
     var idx = player_ids.indexOf(id);
     player_ids.splice(idx, 1);
+    stand_in_a_circle();
   });
   socket.on('call',function(msg_obj){
     $('.call').text(msg_obj.msg);
