@@ -35,7 +35,7 @@ io.on('connection', function(socket){
     //world.init();
     world.done = false;
     world.start(function(worldState){
-      logger.info(worldState);
+      logger.info(JSON.stringify(worldState));
       if(!worldState.done) {
         //じゃんけんポンの掛け声
         io.sockets.emit('call', worldState);

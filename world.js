@@ -88,8 +88,10 @@ World.prototype = {
         var te = self.players[id].te;
         if (winner_te === te) {
           self.players[id].result = '勝ち！';
+          self.players[id].times.win += 1;
         } else {
           self.players[id].result = '負け。';
+          self.players[id].times.lose += 1;
         }
       });
     }
