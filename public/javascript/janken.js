@@ -1,7 +1,32 @@
-$(function(){
+var jankenApp = angular.module('jankenApp', []);
+
+jankenApp.factory('socket', function ($rootScope) {
+  var socket = io.connect();
+  return {
+    on: function (eventName, callback) {
+      socket.on(eventName, function () {
+        var args = arguments;
+        $rootScope.$apply(function () {
+          callback.apply(socket, args);
+        });
+      });
+    },
+    emit: function (eventName, data, callback) {
+      socket.emit(eventName, data, function () {
+        var args = arguments;
+        $rootScope.$apply(function () {
+          if (callback) {
+            callback.apply(socket, args);
+          }
+        });
+      })
+    }
+  };
+});
+
+jankenApp.controller('jankenCtrl', function ($scope, socket) {
   var my_id;
   var player_ids = [];
-  var socket = io.connect();
   var sendTe = function(te){
     socket.emit(
       'te', te
@@ -62,6 +87,7 @@ $(function(){
     player_ids.push(id);
     $('#new_players').after("<span id=\"" + id + "\" class=\"qs moonSelector\"><span class=\"char me\"></span><span class=\"call popover above\"></span></span>");
     stand_in_a_circle();
+    $scope.times = {win: 0, lose: 0};
   });
   socket.on('new_player',function(id){
     // player がクライアント側に存在しなければ追加
@@ -103,7 +129,9 @@ $(function(){
       if (players[id].result === '負け。') {
         $(player_id).children('.char').css('background-position', '-96px 0px');
       }
+      if (my_id === id) {
+        $scope.times = players[id].times;
+      }
     });
   })
 });
-
