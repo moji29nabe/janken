@@ -48,13 +48,14 @@ jankenApp.controller('jankenCtrl', function ($scope, socket) {
   var stand_in_a_circle = function() {
     var map = new MoonMap('#new_players', {
       moonSelector: '.moonSelector',
+      moonClass: 'moon-nocircle',
       radius: radius(player_ids),
       startAngle: 180
     });
     player_ids.forEach(function(player_id) {
       var idstr = '#' + player_id;
       // console.log($(idstr).closest('.moon').css("left"))
-      var left = $(idstr).closest('.moon').css("left");
+      var left = $(idstr).closest('.moon-nocircle').css("left");
       left = parseInt(left, 10);
 
       var childstr = idstr + ' .other';
