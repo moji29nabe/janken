@@ -66,9 +66,33 @@ jankenApp.controller('jankenCtrl', function ($scope, socket) {
       }
     });
   };
+  $scope.pa = function() {
+    sendTe('pa');
+    changeBgColor($('#pa'));
+  }
   $('#start').click(function() {
     socket.emit('start');
   });
+  $('#gu-ico').draggable({
+    axis: 'x',
+    containment: "#containment-wrapper",
+    scroll: false,
+    revert: 'invalid'
+  });
+    $( "#droppable" ).droppable({
+      activeClass: "ui-state-default",
+      hoverClass: "ui-state-hover",
+      drop: function( event, ui ) {
+        $( '#gu-ico' )
+          .draggable('option', {disabled: true});
+        $( this )
+          .addClass( "ui-state-highlight" )
+          .find( "p" )
+            .html( "Dropped!" );
+        sendTe('gu');
+        changeBgColor($('#gu'));
+      }
+    });
   $('#gu').click(function() {
     sendTe('gu');
     changeBgColor($('#gu'));

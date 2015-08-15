@@ -10,6 +10,9 @@
 
     <title>Narrow Jumbotron Template for Bootstrap</title>
 
+    <!-- font-awesome core CSS -->
+    <link href="components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
     <!-- Bootstrap core CSS -->
     <link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -33,18 +36,27 @@
     </script>
     <script
       type="text/javascript"
-      src="/socket.io/socket.io.js">
+      src="components/jquery-ui/jquery-ui.min.js">
     </script>
     <script
       type="text/javascript"
-      src="/javascript/janken.js">
+      src="/socket.io/socket.io.js">
     </script>
     <script
       type="text/javascript"
       src="components/moonmap-master/moonMap.js">
     </script>
+    <script src="components/jqueryui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+    <script
+      type="text/javascript"
+      src="/javascript/janken.js">
+    </script>
     <link type="text/css" href="css/style.css" rel="stylesheet"></link>
     <link type="text/css" href="components/moonmap-master/moonMap.css" rel="stylesheet"></link>
+    <style>
+      #containment-wrapper { width: 95%; height:150px; border:2px solid #ccc; padding: 10px; }
+      #droppable { width: 50px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+    </style>
   </head>
 
   <body ng-controller="jankenCtrl">
@@ -74,9 +86,17 @@
       </div>
 
       <div class="center">
-        <div>
-          <input type="button" id="gu"  value="グー"/>
+        <div id="containment-wrapper">
+          <i id="gu-ico" class="fa fa-hand-rock-o fa-5x fa-rotate-90" ng-click="gu"></i>
+          <div id="droppable" class="ui-widget-header">
+            <p>Drop me here</p>
+          </div>
+          <input type="button" id="gu"  value="グー" class="fa fa-hand-rock-o fa-5x fa-rotate-90"/>
+          <br />
+          <i class="fa fa-hand-scissors-o fa-5x fa-rotate-90" ng-swipe-right="cho()"></i>
           <input type="button" id="cho" value="チョキ"/>
+          <br />
+          <i class="fa fa-hand-paper-o fa-5x fa-rotate-90"></i>
           <input type="button" id="pa"  value="パー"/>
         </div>
         <div>
@@ -88,6 +108,20 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-sm-4 roundbutton">
+          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+          <div class="caption"><p>✊</p></div>
+        </div><!-- /.col-sm-4 -->
+        <div class="col-sm-4">
+          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+          <div class="caption"><p>✌</p></div>
+        </div><!-- /.col-sm-4 -->
+        <div class="col-sm-4">
+          <button ng-click="pa()" class="img-circle" style="background-image:url('data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='); width:140; height:140;"
+          <div class="caption"><p>✋</p></div>
+        </div><!-- /.col-sm-4 -->
+      </div><!-- /.row -->
       <footer class="footer">
         <p>© Company 2014</p>
       </footer>

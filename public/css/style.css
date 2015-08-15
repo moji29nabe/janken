@@ -83,6 +83,31 @@ font-size:0px;
 transition:.3s background, 0s color;
 z-index:1;
 }
+.caption {
+  position: absolute;
+  top: 10%;
+  left: 0px;
+  width: 140px;
+  margin: 0px 20px;
+}
+.caption p {
+  font-size: 72px;
+  text-align: center;
+}
+.roundbutton {
+border-radius: 50%;
+position: absolute;
+min-width: 140px;
+height: 140px;
+//margin:0px;
+//padding:0px;
+font-size:72px;
+//line-height:43px;
+//border:1px solid #ccc;
+//font-size:0px;
+transition:.3s background, 0s color;
+z-index:1;
+}
 /*
 .qs:hover .popover {
   display: block;
