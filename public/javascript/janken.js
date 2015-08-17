@@ -73,7 +73,19 @@ jankenApp.controller('jankenCtrl', function ($scope, socket) {
   $('#start').click(function() {
     socket.emit('start');
   });
-  $('#gu-ico').draggable({
+  $('#ico-gu').draggable({
+    axis: 'x',
+    containment: "#containment-wrapper",
+    scroll: false,
+    revert: 'invalid'
+  });
+  $('#ico-cho').draggable({
+    axis: 'x',
+    containment: "#containment-wrapper",
+    scroll: false,
+    revert: 'invalid'
+  });
+  $('#ico-pa').draggable({
     axis: 'x',
     containment: "#containment-wrapper",
     scroll: false,
@@ -83,14 +95,16 @@ jankenApp.controller('jankenCtrl', function ($scope, socket) {
       activeClass: "ui-state-default",
       hoverClass: "ui-state-hover",
       drop: function( event, ui ) {
-        $( '#gu-ico' )
+        var id = '#' + ui.draggable[0].id;
+        var te = id.match(/#ico-(gu|cho|pa)/)[1];
+        $( id )
           .draggable('option', {disabled: true});
         $( this )
           .addClass( "ui-state-highlight" )
           .find( "p" )
             .html( "Dropped!" );
-        sendTe('gu');
-        changeBgColor($('#gu'));
+        sendTe(te);
+        changeBgColor($(id));
       }
     });
   $('#gu').click(function() {

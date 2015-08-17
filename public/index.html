@@ -54,8 +54,8 @@
     <link type="text/css" href="css/style.css" rel="stylesheet"></link>
     <link type="text/css" href="components/moonmap-master/moonMap.css" rel="stylesheet"></link>
     <style>
-      #containment-wrapper { width: 95%; height:150px; border:2px solid #ccc; padding: 10px; }
-      #droppable { width: 50px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+      #containment-wrapper { width: 95%; height:300px; border:2px solid #ccc; padding: 10px; }
+      #droppable { width: 50px; height: 250px; border:2px solid #ccc;padding: 0.5em; float: left; margin: 10px; }
     </style>
   </head>
 
@@ -87,16 +87,16 @@
 
       <div class="center">
         <div id="containment-wrapper">
-          <i id="gu-ico" class="fa fa-hand-rock-o fa-5x fa-rotate-90" ng-click="gu"></i>
+          <i id="ico-gu" class="fa fa-hand-rock-o fa-5x fa-rotate-90" ng-click="gu"></i>
           <div id="droppable" class="ui-widget-header">
             <p>Drop me here</p>
           </div>
           <input type="button" id="gu"  value="グー" class="fa fa-hand-rock-o fa-5x fa-rotate-90"/>
           <br />
-          <i class="fa fa-hand-scissors-o fa-5x fa-rotate-90" ng-swipe-right="cho()"></i>
+          <i id="ico-cho" class="fa fa-hand-scissors-o fa-5x fa-rotate-90" ng-swipe-right="cho()"></i>
           <input type="button" id="cho" value="チョキ"/>
           <br />
-          <i class="fa fa-hand-paper-o fa-5x fa-rotate-90"></i>
+          <i id="ico-pa" class="fa fa-hand-paper-o fa-5x fa-rotate-90"></i>
           <input type="button" id="pa"  value="パー"/>
         </div>
         <div>
