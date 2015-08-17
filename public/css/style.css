@@ -38,7 +38,7 @@ body {
   width: inherit;
 }
 
-.seeleft {
+.seeleft, .upsidedown{
   -moz-transform:   scaleX(-1);
   -webkit-transform:scaleX(-1);
 }
