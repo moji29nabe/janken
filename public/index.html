@@ -54,8 +54,8 @@
     <link type="text/css" href="css/style.css" rel="stylesheet"></link>
     <link type="text/css" href="components/moonmap-master/moonMap.css" rel="stylesheet"></link>
     <style>
-      #containment-wrapper { width: 95%; height:300px; border:2px solid #ccc; padding: 10px; }
-      #droppable { width: 50px; height: 250px; border:2px solid #ccc;padding: 0.5em; float: left; margin: 10px; }
+      #containment-wrapper { width: 300px; height:230px; border:2px solid #ccc; padding: 10px; }
+      #droppable { width: 50px; height: 200px; border:2px solid #ccc;padding: 0.5em; float: left; margin: 10px; }
     </style>
   </head>
 
@@ -74,45 +74,57 @@
       </div>
 
       <div class="row marketing">
-        <div class="col-lg-6">
+        <div class="col-xs-3">
           <h4>You win</h4>
           <p id="win">{{times.win}}</p>
         </div>
 
-        <div class="col-lg-6">
+        <div class="col-xs-3">
           <h4>You lose</h4>
           <p id="lose">{{times.lose}}</p>
         </div>
       </div>
 
-      <div class="center">
-        <div id="containment-wrapper">
-          <i id="ico-gu" class="fa fa-hand-rock-o fa-5x fa-rotate-90" ng-click="gu"></i>
-          <div id="droppable" class="ui-widget-header">
-            <p>Drop te here</p>
+      <div>
+        <div class="col-xs-4">
+          <div id="containment-wrapper">
+            <div class="col-xs-8">
+              <i id="ico-gu" class="fa fa-hand-rock-o fa-5x fa-rotate-90" ng-click="gu"></i>
+              <!-- <input type="button" id="gu"  value="グー" /> -->
+              <br />
+              <i id="ico-cho" class="fa fa-hand-scissors-o fa-5x upsidedown" ng-swipe-right="cho()"></i>
+              <!-- <input type="button" id="cho" value="チョキ"/> -->
+              <br />
+              <i id="ico-pa" class="fa fa-hand-paper-o fa-5x fa-rotate-90"></i>
+              <!-- <input type="button" id="pa"  value="パー"/> -->
+            </div>
+            <div id="droppable" class="ui-widget-header col-xs-4">
+              <p>Drop te here</p>
+            </div>
           </div>
-          <input type="button" id="gu"  value="グー" />
-          <br />
-          <i id="ico-cho" class="fa fa-hand-scissors-o fa-5x upsidedown" ng-swipe-right="cho()"></i>
-          <input type="button" id="cho" value="チョキ"/>
-          <br />
-          <i id="ico-pa" class="fa fa-hand-paper-o fa-5x fa-rotate-90"></i>
-          <input type="button" id="pa"  value="パー"/>
+          <div>
+            <input type="button" id="start"  value="開始"/>
+          </div>
         </div>
-        <div>
-          <input type="button" id="start"  value="開始"/>
-        </div>
-      </div>
-      <div id="container">
-        <div class="center orbit-center" id="new_players">
-        </div>
-      </div>
 
-      <footer class="footer">
-        <p>© Company 2014</p>
-      </footer>
+        <div class="col-xs-8">
+          <div class="center" style="margin-top:0px !important">
+            <div id="container">
+              <div class="center orbit-center" style="margin-top:50px !important" id="new_players">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
 
     </div> <!-- /container -->
+
+    <footer class="footer">
+      <div class="container">
+        <p>© Company 2014</p>
+      </div>
+    </footer>
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
