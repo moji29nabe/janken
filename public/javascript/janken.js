@@ -74,24 +74,18 @@ jankenApp.controller('jankenCtrl', function ($scope, socket) {
     socket.emit('start');
   });
   $('#ico-gu').draggable({
-    axis: 'x',
-    containment: "#containment-wrapper",
     scroll: false,
     revert: 'invalid'
   });
   $('#ico-cho').draggable({
-    axis: 'x',
-    containment: "#containment-wrapper",
     scroll: false,
     revert: 'invalid'
   });
   $('#ico-pa').draggable({
-    axis: 'x',
-    containment: "#containment-wrapper",
     scroll: false,
     revert: 'invalid'
   });
-    $( "#droppable" ).droppable({
+    $( "#new_players" ).droppable({
       activeClass: "ui-state-default",
       hoverClass: "ui-state-hover",
       drop: function( event, ui ) {

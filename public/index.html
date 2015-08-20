@@ -86,35 +86,26 @@
       </div>
 
       <div>
-        <div class="col-xs-4">
-          <div id="containment-wrapper">
-            <div class="col-xs-8">
-              <i id="ico-gu" class="fa fa-hand-rock-o fa-5x fa-rotate-90" ng-click="gu"></i>
-              <!-- <input type="button" id="gu"  value="グー" /> -->
-              <br />
-              <i id="ico-cho" class="fa fa-hand-scissors-o fa-5x upsidedown" ng-swipe-right="cho()"></i>
-              <!-- <input type="button" id="cho" value="チョキ"/> -->
-              <br />
-              <i id="ico-pa" class="fa fa-hand-paper-o fa-5x fa-rotate-90"></i>
-              <!-- <input type="button" id="pa"  value="パー"/> -->
+          <div class="center" style="margin-top:0px !important">
+            <div id="container" style="height:200px">
+              <div class="center orbit-center" style="margin-top:50px !important;border:2px solid #ccc;" id="new_players">
+              </div>
             </div>
-            <div id="droppable" class="ui-widget-header col-xs-4">
+
+              <i id="ico-gu" class="fa fa-hand-rock-o fa-5x fa-rotate-90" ng-click="gu"></i>
+              <i id="ico-cho" class="fa fa-hand-scissors-o fa-5x upsidedown" ng-swipe-right="cho()"></i>
+              <i id="ico-pa" class="fa fa-hand-paper-o fa-5x fa-rotate-90"></i>
+          </div>
+
+
+            <div id="droppable" class="ui-widget-header">
               <p>Drop te here</p>
             </div>
           </div>
           <div>
             <input type="button" id="start"  value="開始"/>
           </div>
-        </div>
 
-        <div class="col-xs-8">
-          <div class="center" style="margin-top:0px !important">
-            <div id="container">
-              <div class="center orbit-center" style="margin-top:50px !important" id="new_players">
-              </div>
-            </div>
-          </div>
-        </div>
 
       </div>
 
