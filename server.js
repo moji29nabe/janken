@@ -1,10 +1,10 @@
-var log4js = require('log4js');
-log4js.configure('log4js_config.json');
-var logger = log4js.getLogger('cheese');
+//var log4js = require('log4js');
+//log4js.configure('log4js_config.json');
+//var logger = log4js.getLogger('cheese');
 
 var express = require('express');
 var app = express();
-app.use(log4js.connectLogger(logger, { level: log4js.levels.INFO }));
+//app.use(log4js.connectLogger(logger, { level: log4js.levels.INFO }));
 app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
@@ -12,8 +12,9 @@ app.get('/', function(req, res){
 
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-http.listen(3000, function(){
-  logger.info('listening on *:3000');
+var port = process.env.PORT || 5000;
+http.listen(port, function(){
+  //logger.info('listening on *:' + port);
 });
 
 var World = require('./world');
@@ -26,7 +27,7 @@ io.on('connection', function(socket){
     io.sockets.emit('new_player', world.players[id].id);
   });
   socket.on('disconnect', function(){
-    logger.info('disconnect ' + socket.id);
+    //logger.info('disconnect ' + socket.id);
     world.logout(socket.id);
     io.sockets.emit('leave_player', socket.id);
   });
@@ -35,7 +36,7 @@ io.on('connection', function(socket){
     //world.init();
     world.done = false;
     world.start(function(worldState){
-      logger.info(JSON.stringify(worldState));
+      //logger.info(JSON.stringify(worldState));
       if(!worldState.done) {
         //じゃんけんポンの掛け声
         io.sockets.emit('call', worldState);
@@ -46,7 +47,7 @@ io.on('connection', function(socket){
     });
   });
   socket.on('te', function(te) {
-    logger.trace(te);
+    //logger.trace(te);
     player.updateTe(te);
   });
 });
